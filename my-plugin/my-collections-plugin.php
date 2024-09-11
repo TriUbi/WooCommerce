@@ -24,15 +24,14 @@ function create_lookbook_post_type() {
 }
 add_action('init', 'create_lookbook_post_type');
 
-// Hantera formulärdata och skapa lookbook
 function handle_lookbook_submission() {
     if (isset($_POST['submit_lookbook'])) {
-        // Sanitize form input
+       
         $lookbook_title = sanitize_text_field($_POST['lookbook_title']);
         $lookbook_content = sanitize_textarea_field($_POST['lookbook_content']);
         $lookbook_products = isset($_POST['lookbook_products']) ? array_map('intval', $_POST['lookbook_products']) : [];
 
-        // Skapa en ny lookbook (custom post type)
+  
         $lookbook_id = wp_insert_post(array(
             'post_title'   => $lookbook_title,
             'post_content' => $lookbook_content,
@@ -40,18 +39,18 @@ function handle_lookbook_submission() {
             'post_type'    => 'lookbook',
         ));
 
-        // Om lookbooken skapades, spara de valda produkterna som post_meta
+      
         if ($lookbook_id && !is_wp_error($lookbook_id)) {
             update_post_meta($lookbook_id, 'lookbook_products', $lookbook_products);
 
-         // Omdirigera till arkivsidan för alla Lookbooks (All Looks)
-         $lookbook_archive_url = get_post_type_archive_link('lookbook'); // Hämta URL för arkivsidan
-         wp_redirect($lookbook_archive_url);  // Omdirigera användaren till arkivsidan för Lookbooks
-         exit;
+            $lookbook_archive_url = get_post_type_archive_link('lookbook');
+            wp_redirect($lookbook_archive_url); 
+            exit;
         }
     }
 }
 add_action('template_redirect', 'handle_lookbook_submission');
+
 
 
 
@@ -158,17 +157,16 @@ function lookbook_frontend_form() {
 add_shortcode('create_lookbook_form', 'lookbook_frontend_form');
 
 
-// Registrera en taxonomi för Lookbooks
+// Skapa en anpassad taxonomi för Lookbooks (Kategorier)
 function create_lookbook_taxonomy() {
     register_taxonomy(
         'lookbook_category', // Slug för taxonomin
-        'lookbook', // Custom post type som taxonomin är kopplad till
+        'lookbook', // CPT som taxonomin är kopplad till
         array(
-            'label' => __( 'Lookbook Categories' ),
-            'rewrite' => array( 'slug' => 'lookbook-category' ),
-            'hierarchical' => true, // Om kategorierna ska vara hierarkiska som vanliga kategorier
-            'show_in_rest' => true, // För att använda taxonomin med Gutenberg
+            'label' => 'Lookbook Kategorier',
+            'hierarchical' => true, // Gör kategorierna hierarkiska
+            'show_in_rest' => true, // Aktivera för användning med Gutenberg
         )
     );
 }
-add_action( 'init', 'create_lookbook_taxonomy' );
+add_action('init', 'create_lookbook_taxonomy');

@@ -20,7 +20,7 @@
         <li>
             <h2><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
 
-            <!-- Visa datumet när lookbooken skapades -->
+           
             <p>Skapad: <?php echo get_the_date(); ?></p>
 
             <?php
@@ -59,3 +59,4 @@
 <?php endif; ?>
 
 <?php get_footer(); ?>
+

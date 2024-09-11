@@ -64,6 +64,11 @@ input[type="submit"] {
 input[type="submit"]:hover {
     background-color: #004d40;
 }
+.lookbook-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Skapa flera kolumner */
+    gap: 20px; /* Mellanrum mellan lookbooks */
+}
 
 .lookbook-container ul {
     list-style: none;
@@ -71,22 +76,24 @@ input[type="submit"]:hover {
 }
 
 .lookbook-container li {
-    margin-bottom: 20px;
-    display: flex;
-    align-items: center;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
 }
 
 .lookbook-container img {
-    margin-right: 15px;
-    width: 100px;
+    width: 100%;
     height: auto;
+    margin-bottom: 10px;
 }
 
 .lookbook-container h4 {
-    margin: 0;
-    font-size: 18px;
+    margin: 10px 0;
 }
 
 .lookbook-container p {
-    margin: 5px 0;
+    color: #333;
+    font-size: 14px;
 }
