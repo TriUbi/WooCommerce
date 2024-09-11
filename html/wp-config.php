@@ -81,7 +81,11 @@ $table_prefix = 'wp_';
  */
 define( 'WP_DEBUG', false );
 
+define('FS_METHOD', 'direct');
+
 /* Add any custom values between this line and the "stop editing" line. */
+
+/*sjxUKYuBRCE5WfnvKt lösernord
 
 
 
